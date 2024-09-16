@@ -6,11 +6,12 @@ export default function StepLayout({
   header,
   subtext,
   goBackButton,
+  confirmButton,
 }) {
   const { prevStep, nextStep } = useRegister();
 
   return (
-    <div className="flex flex-col h-full pr-20">
+    <div className="flex flex-col h-full px-5">
       <StepHeader header={header} subtext={subtext} />
 
       {children}
@@ -19,21 +20,25 @@ export default function StepLayout({
         <div className="flex justify-between">
           <button
             onClick={() => prevStep()}
-            className="font-medium text-neutralCoolGray"
+            className="font-medium text-neutralCoolGray hover:text-primaryMarineBlue duration-200"
           >
             Go Back
           </button>
           <button
             onClick={() => nextStep()}
-            className="text-neutralWhite bg-primaryMarineBlue py-2 px-3 w-fit font-medium rounded-md"
+            className={`text-neutralWhite ${
+              confirmButton
+                ? "bg-primaryPurplishBlue hover:bg-primaryPastelBlue duration-200"
+                : "bg-primaryMarineBlue hover:bg-primaryPurplishBlue duration-200"
+            } py-2 px-3 w-fit font-medium rounded-md`}
           >
-            Next Step
+            {confirmButton ? "Confirm" : "Next Step"}
           </button>
         </div>
       ) : (
         <button
           onClick={() => nextStep()}
-          className="text-neutralWhite bg-primaryMarineBlue py-2 px-3 w-fit font-medium rounded-md self-end"
+          className="text-neutralWhite bg-primaryMarineBlue hover:bg-primaryPurplishBlue duration-200 py-2 px-3 w-fit font-medium rounded-md self-end"
         >
           Next Step
         </button>
@@ -44,7 +49,7 @@ export default function StepLayout({
 
 function StepHeader({ header, subtext }) {
   return (
-    <div className="flex-1 flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pb-6">
       <h1 className="font-bold text-primaryMarineBlue text-3xl">{header}</h1>
       <span className="text-neutralCoolGray">{subtext}</span>
     </div>

@@ -14,6 +14,13 @@ export function RegisterProvider({ children }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userTel, setUserTel] = useState("");
+  const [addons, setAddons] = useState({ 0: false, 1: false, 2: false });
+
+  function toggleAddons(index) {
+    const newAddons = { ...addons };
+    newAddons[index] = !addons[index];
+    setAddons(newAddons);
+  }
 
   function nextStep() {
     setStep(step + 1);
@@ -42,6 +49,8 @@ export function RegisterProvider({ children }) {
     userName,
     userEmail,
     userTel,
+    addons,
+    toggleAddons,
     setUserName,
     setUserEmail,
     setUserTel,

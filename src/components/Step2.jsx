@@ -1,34 +1,11 @@
-import arcadeIcon from "../assets/images/icon-arcade.svg";
-import advancedIcon from "../assets/images/icon-advanced.svg";
-import proIcon from "../assets/images/icon-pro.svg";
 import ReactSwitch from "react-switch";
 import { useRegister } from "../context/RegisterContext";
 import StepLayout from "./StepLayout";
+import { plans } from "../utils/planUtils";
 
 export default function Step2() {
   const { monthlyPayment, toggleMonthlyPayment, selectedPlan, handleSetPlan } =
     useRegister();
-
-  const plans = [
-    {
-      name: "Arcade",
-      icon: arcadeIcon,
-      priceMo: 9,
-      priceYr: 90,
-    },
-    {
-      name: "Advanced",
-      icon: advancedIcon,
-      priceMo: 12,
-      priceYr: 120,
-    },
-    {
-      name: "Pro",
-      icon: proIcon,
-      priceMo: 15,
-      priceYr: 150,
-    },
-  ];
 
   return (
     <StepLayout
@@ -36,11 +13,11 @@ export default function Step2() {
       subtext="You have the option of monthly or yearly billing."
       goBackButton
     >
-      <div className="grid grid-cols-3 gap-3 pt-6">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-6">
         {plans.map((plan, index) => {
           return (
             <button
-              className={`flex flex-col border rounded-md py-4 px-5 ${
+              className={`flex flex-col border hover:border-neutralCoolGray duration-200 rounded-md py-4 px-5 h-fit ${
                 selectedPlan === index
                   ? "border-neutralCoolGray"
                   : "border-neutralLightGray"
@@ -65,7 +42,7 @@ export default function Step2() {
             </button>
           );
         })}
-        <div className="col-span-3 flex justify-center items-center gap-3 py-2 bg-neutralLightGray rounded-md">
+        <div className="col-span-3 flex justify-center items-center gap-3 py-2 bg-neutralLightGray rounded-md h-fit">
           <p
             className={`font-medium ${
               monthlyPayment ? "text-primaryMarineBlue" : "text-neutralCoolGray"
